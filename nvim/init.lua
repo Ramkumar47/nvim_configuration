@@ -32,7 +32,16 @@ vim.opt.mouse=""
 -- loading custom function definitions
 require("customFunctions")
 
+-- loading lualine configuration
+require("lualineConfiguration")
+
 -- removing trailing whitespaces with autocmd
 vim.api.nvim_create_augroup("customAutoCmds",{clear=true})
 vim.api.nvim_create_autocmd({'BufWritePre'},{command = "RemoveTrailingSpaces",
 group="customAutoCmds"})
+
+-- hiding command window
+vim.opt.cmdheight = 1
+
+-- command to remove mixed indents
+vim.keymap.set('n','<leader>rt',":retab<CR>")

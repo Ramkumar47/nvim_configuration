@@ -15,7 +15,10 @@ vim.keymap.set('n','<leader>hl',':HoriDash<CR>')
 -- remove trailing spaces-------------------------------------------------------
 local function removeTrailingSpaces()
     vim.cmd("normal! mT")
-    vim.cmd("%s/\\s*$//e")
+    -- vim.cmd("%s/\\s+$//e")
+    vim.cmd([[keeppatterns %s/\s\+$//e]])
     vim.cmd("normal! `T")
 end
 vim.api.nvim_create_user_command('RemoveTrailingSpaces',removeTrailingSpaces,{})
+
+
