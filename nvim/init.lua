@@ -1,8 +1,8 @@
+-- NeoVim Lua configuration script
 vim.cmd("set expandtab")
 vim.cmd("set tabstop=4")
 vim.cmd("set softtabstop=4")
-vim.cmd("set shiftwidth=4")
-vim.cmd("set ignorecase")
+vim.cmd("set shiftwidth=4") vim.cmd("set ignorecase")
 vim.cmd("set smartcase")
 vim.cmd("set autochdir")
 
@@ -29,19 +29,24 @@ vim.keymap.set('n','<leader>fg',builtin.live_grep,{})
 -- disabling mouse
 vim.opt.mouse=""
 
--- loading custom function definitions
-require("customFunctions")
+-- loading custom functions definitions
+require("customLuaScripts/generalFunctions")
+require("customLuaScripts/cFunctions")
+
+-- loading autocmds definitions
+require("config.autocmds")
 
 -- loading lualine configuration
 require("lualineConfiguration")
 
--- removing trailing whitespaces with autocmd
-vim.api.nvim_create_augroup("customAutoCmds",{clear=true})
-vim.api.nvim_create_autocmd({'BufWritePre'},{command = "RemoveTrailingSpaces",
-group="customAutoCmds"})
+-- -- removing trailing whitespaces with autocmd
+-- vim.api.nvim_create_augroup("customAutoCmds",{clear=true})
+-- vim.api.nvim_create_autocmd({'BufWritePre'},{command = "RemoveTrailingSpaces",
+-- group="customAutoCmds"})
 
 -- hiding command window
 vim.opt.cmdheight = 1
 
 -- command to remove mixed indents
 vim.keymap.set('n','<leader>rt',":retab<CR>")
+

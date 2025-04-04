@@ -21,4 +21,11 @@ local function removeTrailingSpaces()
 end
 vim.api.nvim_create_user_command('RemoveTrailingSpaces',removeTrailingSpaces,{})
 
-
+-- BracketSub function----------------------------------------------------------
+local function bracketSub()
+    vim.cmd("call search('<>')")
+    vim.cmd("normal! cf> ")
+    vim.cmd("startinsert")
+end
+vim.api.nvim_create_user_command('BracketSub',bracketSub,{})
+vim.keymap.set('n','<leader><leader>',':BracketSub<CR>')
