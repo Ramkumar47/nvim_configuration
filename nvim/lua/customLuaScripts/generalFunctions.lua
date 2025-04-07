@@ -5,7 +5,7 @@ local function horiDash()
     vim.cmd("normal! 0")
     vim.cmd("normal! 100A-")
     vim.cmd("normal! 0")
-    vim.cmd("normal! 80lD")
+    vim.cmd("normal! 79lD")
     vim.cmd("normal! `M")
 end
 
