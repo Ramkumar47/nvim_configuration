@@ -1,3 +1,7 @@
+-- disable netrw at the very start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- NeoVim Lua configuration script
 vim.cmd("set expandtab")
 vim.cmd("set tabstop=4")
@@ -25,6 +29,9 @@ vim.cmd("set nohlsearch")
 local builtin = require("telescope.builtin")
 vim.keymap.set('n','<C-p>',builtin.find_files,{})
 vim.keymap.set('n','<leader>fg',builtin.live_grep,{})
+
+-- setting up nvim tree toggle
+vim.keymap.set('n','<leader>nt',":NvimTreeToggle<CR>",{})
 
 -- disabling mouse
 vim.opt.mouse=""

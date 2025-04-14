@@ -57,4 +57,9 @@ vim.api.nvim_create_autocmd("FileType",{
     end,
 group="autoCmdsForQuarto"})
 
-
+-- auto close terminal upon code complete
+vim.api.nvim_create_autocmd("TermClose", {
+    callback = function()
+       vim.cmd("close")
+    end
+})
