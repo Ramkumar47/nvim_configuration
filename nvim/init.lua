@@ -55,3 +55,5 @@ vim.opt.cmdheight = 1
 -- command to remove mixed indents
 vim.keymap.set('n','<leader>rt',":retab<CR>")
 
+vim.keymap.set('n','<F1>',"<Esc>")
+vim.keymap.set('i','<F1>',"<Esc>")
