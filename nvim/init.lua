@@ -57,3 +57,7 @@ vim.keymap.set('n','<leader>rt',":retab<CR>")
 
 vim.keymap.set('n','<F1>',"<Esc>")
 vim.keymap.set('i','<F1>',"<Esc>")
+
+-- setting filetype to cpp
+vim.keymap.set('n','<leader>fc',":set filetype=cpp<CR>",{})
+
