@@ -2,10 +2,12 @@
 
 -- initializing section
 local function quarto_initializeSection()
-    vim.cmd("normal! o:::{}")
+    vim.cmd("normal! o::: {}")
+    vim.cmd("normal! o")
     vim.cmd("normal! o<>")
+    vim.cmd("normal! o")
     vim.cmd("normal! o:::")
-    vim.cmd("normal! 2kf{l")
+    vim.cmd("normal! 4kf{l")
     vim.cmd("startinsert")
 end
 vim.api.nvim_create_user_command('QuartoInitializeSection',quarto_initializeSection,{})
@@ -20,7 +22,8 @@ vim.api.nvim_create_user_command('QuartoInitializeSection',quarto_initializeSect
 -- endfunction
 
 local function quarto_initializeColumns()
-    vim.cmd("normal! o::::{.columns .v-center-container}")
+    vim.cmd("normal! o:::: {.columns .v-center-container}")
+    vim.cmd("normal! o")
     vim.cmd("normal! o::::")
     vim.cmd("normal! k")
 end
