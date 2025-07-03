@@ -54,6 +54,7 @@ vim.api.nvim_create_autocmd("FileType",{
     callback= function()
         vim.keymap.set('n','<leader>is',':QuartoInitializeSection<CR>',{buffer=true})
         vim.keymap.set('n','<leader>ic',':QuartoInitializeColumns<CR>',{buffer=true})
+        vim.keymap.set('n','<leader>be',':LatexBeginEnv<CR>',{buffer=true})
     end,
 group="autoCmdsForQuarto"})
 
