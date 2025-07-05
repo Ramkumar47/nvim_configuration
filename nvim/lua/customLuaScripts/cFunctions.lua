@@ -50,3 +50,14 @@ local function C_initalizeHeader()
 end
 
 vim.api.nvim_create_user_command('CInitializeHeader',C_initalizeHeader,{})
+
+local function C_insertPrintStatement()
+
+    -- writing print statement
+    vim.cmd("normal! o")
+    vim.cmd("normal! ostd::cout << \" \" << std::endl;")
+    vim.cmd("normal! I")
+
+end
+
+vim.api.nvim_create_user_command('CInsertPrintStatement',C_insertPrintStatement,{})

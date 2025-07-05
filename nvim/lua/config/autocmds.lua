@@ -19,6 +19,7 @@ vim.api.nvim_create_autocmd("FileType",{
     pattern = {"cpp","C","c","h"},
     callback= function()
         vim.keymap.set('n','<leader>is',':CInitializeHeader<CR>',{buffer=true})
+        vim.keymap.set('n','<leader>ip',':CInsertPrintStatement<CR>',{buffer=true})
     end,
 group="autoCmdsForC"})
 
