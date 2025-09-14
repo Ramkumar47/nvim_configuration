@@ -55,6 +55,7 @@ local function C_insertPrintStatement()
 
     -- writing print statement
     vim.cmd("normal! o")
+    vim.cmd("normal! o")
     vim.cmd("normal! mA")
     vim.cmd("normal! istd::cout << \" \" << std::endl;")
     vim.cmd("normal! o")
