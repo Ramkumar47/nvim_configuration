@@ -61,3 +61,8 @@ vim.keymap.set('i','<F1>',"<Esc>")
 -- setting filetype to cpp
 vim.keymap.set('n','<leader>fc',":set filetype=cpp<CR>",{})
 
+-- toggling spellcheck
+local function toggleSpellCheck()
+    vim.opt.spell = not(vim.opt.spell:get())
+end
+vim.keymap.set('n','<leader>sc',toggleSpellCheck)

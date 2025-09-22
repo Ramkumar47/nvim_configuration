@@ -11,6 +11,17 @@ local function mixedIndentStatus()
     end
 end
 
+vim.api.nvim_set_hl(0, "customSpellCheckHighlight", { fg = "#4c4f69", bg = "#ea76cb", bold = true })
+
+local function spellCheckStatus()
+    if vim.opt.spell:get() then
+        return string.format("%%#%s# SPELL %%#%s#", "customSpellCheckHighlight", "customSpellCheckHighlight")
+    else
+        return [[ ]]
+    end
+    vim.opt.spell=not(vim.opt.spell:get())
+end
+
 require('lualine').setup {
   options = {
     icons_enabled = false,
@@ -35,7 +46,7 @@ require('lualine').setup {
     lualine_a = {'mode'},
     lualine_b = {},
     lualine_c = {'filename'},
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_x = {spellCheckStatus,'encoding', 'fileformat', 'filetype'},
     lualine_y = {'progress'},
     lualine_z = {'location',mixedIndentStatus}
   },
