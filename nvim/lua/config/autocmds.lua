@@ -65,3 +65,14 @@ vim.api.nvim_create_autocmd("TermClose", {
        vim.cmd("close")
     end
 })
+
+-- auto assign keymaps for julia files
+vim.api.nvim_create_augroup("autoCmdsForJulia",{clear=true})
+vim.api.nvim_create_autocmd("FileType",{
+    pattern = {"julia"},
+    callback= function()
+        vim.keymap.set('n','<leader>is',':JuliaInitializeScript<CR>',{buffer=true})
+        vim.keymap.set('n','<leader>ip',':JuliaInitializePlot<CR>',{buffer=true})
+    end,
+group="autoCmdsForJulia"})
+

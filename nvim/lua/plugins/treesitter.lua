@@ -5,7 +5,7 @@ return {
             require("nvim-treesitter.install").update({ with_sync = true })()
         end,
         opts={
-            ensure_installed = { "c", "lua", "vim", "vimdoc", "python", "bash", "markdown","html" },
+            ensure_installed = { "c", "lua", "vim", "vimdoc", "python", "bash", "markdown","html", "julia" },
             sync_install = false,
             highlight = { enable = true },
             indent = { enable = true },

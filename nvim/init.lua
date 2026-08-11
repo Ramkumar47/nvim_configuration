@@ -42,6 +42,7 @@ require("customLuaScripts/cFunctions")
 require("customLuaScripts/latexFunctions")
 require("customLuaScripts/pythonFunctions")
 require("customLuaScripts/quartoFunctions")
+require("customLuaScripts/juliaFunctions")
 
 -- loading autocmds definitions
 require("config.autocmds")
@@ -66,3 +67,11 @@ local function toggleSpellCheck()
     vim.opt.spell = not(vim.opt.spell:get())
 end
 vim.keymap.set('n','<leader>sc',toggleSpellCheck)
+
+-- removing continuous commenting upon Return and newline in all files
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function()
+    vim.opt_local.formatoptions:remove({ "r", "o" }) -- r for return o for newline
+  end,
+})
