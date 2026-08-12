@@ -30,7 +30,8 @@ local function julia_initializeScript()
     -- writing horizontal line
     vim.cmd("normal! o")
     vim.cmd("normal! o#")
-    vim.cmd("normal! 78A=")
+    vim.cmd("normal! 76A=")
+    vim.cmd("normal! A=#")
     vim.cmd("normal! o")
 
     -- writing insert stamp
@@ -40,7 +41,8 @@ local function julia_initializeScript()
     -- writing horizontal line
     vim.cmd("normal! o")
     vim.cmd("normal! o#")
-    vim.cmd("normal! 78A=")
+    vim.cmd("normal! 76A=")
+    vim.cmd("normal! A=#")
     vim.cmd("normal! gg")
 end
 vim.api.nvim_create_user_command('JuliaInitializeScript',julia_initializeScript,{})
