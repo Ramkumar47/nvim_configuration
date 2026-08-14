@@ -13,6 +13,15 @@ vim.cmd("set autochdir")
 -- lazy setup
 require("config.lazy")
 
+-- customizing colorscheme
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "catppuccin*",
+  callback = function()
+    vim.api.nvim_set_hl(0, "number", { fg = "#f38ba8" }) -- catppuccin peach, pick any color you like
+    vim.api.nvim_set_hl(0, "number.julia", { fg = "#f38ba8" }) -- some themes use language-specific overrides
+  end,
+})
+
 -- setting up colorscheme
 vim.cmd.colorscheme "catppuccin"
 
