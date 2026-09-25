@@ -76,3 +76,195 @@ local function python_initializePlot()
     vim.cmd("normal! 'A")
 end
 vim.api.nvim_create_user_command('PythonInitializePlot',python_initializePlot,{})
+
+
+-- ============================================================
+-- Manim utilities for Neovim
+-- ============================================================
+
+-- local function render_manim()
+--     vim.cmd("write")
+--
+--     local file = vim.fn.expand("%:p")
+--
+--     -- Find the Scene class surrounding the cursor
+--     local cursor_line = vim.api.nvim_win_get_cursor(0)[1]
+--     local lines = vim.api.nvim_buf_get_lines(
+--         0,
+--         0,
+--         cursor_line,
+--         false
+--     )
+--
+--     local scene = nil
+--
+--     for i = #lines, 1, -1 do
+--         local match = lines[i]:match("^class%s+(%w+)%s*%(")
+--
+--         if match then
+--             scene = match
+--             break
+--         end
+--     end
+--
+--     if not scene then
+--         vim.notify(
+--             "Could not find a Manim Scene class",
+--             vim.log.levels.ERROR
+--         )
+--         return
+--     end
+--
+--     vim.notify(
+--         "Rendering " .. scene .. "...",
+--         vim.log.levels.INFO
+--     )
+--
+--     vim.fn.jobstart({
+--         "manim",
+--         "-pql",
+--         file,
+--         scene,
+--     }, {
+--         stdout_buffered = true,
+--
+--         on_exit = function(_, exit_code)
+--             if exit_code == 0 then
+--                 vim.notify(
+--                     "Manim render complete: " .. scene,
+--                     vim.log.levels.INFO
+--                 )
+--             else
+--                 vim.notify(
+--                     "Manim render failed",
+--                     vim.log.levels.ERROR
+--                 )
+--             end
+--         end,
+--     })
+-- end
+
+local function get_current_scene()
+    local cursor_line = vim.api.nvim_win_get_cursor(0)[1]
+
+    local lines = vim.api.nvim_buf_get_lines(
+        0,
+        0,
+        cursor_line,
+        false
+    )
+
+    for i = #lines, 1, -1 do
+        local scene = lines[i]:match("^%s*class%s+(%w+)%s*%(")
+
+        if scene then
+            return scene
+        end
+    end
+
+    return nil
+end
+
+local function render_manim()
+    vim.cmd("write")
+
+    local file = vim.fn.expand("%:p")
+    local scene = get_current_scene()
+
+    if not scene then
+        vim.notify(
+            "No Manim Scene class found above cursor",
+            vim.log.levels.ERROR
+        )
+        return
+    end
+
+    vim.notify(
+        "Rendering " .. scene .. "...",
+        vim.log.levels.INFO
+    )
+
+    vim.fn.jobstart({
+        "manim",
+        "-pql",
+        file,
+        scene,
+    }, {
+        stdout_buffered = true,
+
+        on_exit = function(_, exit_code)
+            if exit_code == 0 then
+                vim.notify(
+                    "Manim render complete: " .. scene,
+                    vim.log.levels.INFO
+                )
+            else
+                vim.notify(
+                    "Manim render failed",
+                    vim.log.levels.ERROR
+                )
+            end
+        end,
+    })
+end
+vim.api.nvim_create_user_command('RenderManim',render_manim,{})
+
+-- ============================================================
+-- Open already-rendered scene under cursor
+-- ============================================================
+
+vim.api.nvim_create_user_command("ManimLatest", function()
+-- local function view_manim_scene()
+    local file = vim.fn.expand("%:p")
+    local scene = get_current_scene()
+
+    if not scene then
+        vim.notify(
+            "No Manim Scene class found above cursor",
+            vim.log.levels.ERROR
+        )
+        return
+    end
+
+    -- Directory containing the Python file
+    local project_dir = vim.fn.getcwd()
+
+    -- Manim video directory
+    local video_dir = project_dir .. "/media/videos"
+
+    -- Search for the MP4 corresponding to this Scene
+    local cmd = string.format(
+        "find %s -type f -name '%s.mp4' -print -quit",
+        vim.fn.shellescape(video_dir),
+        scene
+    )
+
+    local handle = io.popen(cmd)
+    local video = handle:read("*a")
+    handle:close()
+
+    video = video:gsub("%s+$", "")
+
+    if video == "" then
+        vim.notify(
+            "No rendered video found for: " .. scene,
+            vim.log.levels.WARN
+        )
+        return
+    end
+
+    vim.notify(
+        "Opening " .. scene .. ".mp4",
+        vim.log.levels.INFO
+    )
+
+    vim.fn.jobstart({
+        "mpv",
+        "--keep-open=yes",
+        video,
+    }, {
+        detach = true,
+    })
+end, {
+    desc = "Open latest Manim video",
+})

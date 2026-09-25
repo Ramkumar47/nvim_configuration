@@ -45,6 +45,8 @@ vim.api.nvim_create_autocmd("FileType",{
     callback= function()
         vim.keymap.set('n','<leader>is',':PythonInitializeScript<CR>',{buffer=true})
         vim.keymap.set('n','<leader>ip',':PythonInitializePlot<CR>',{buffer=true})
+        vim.keymap.set('n','<leader>mr',':RenderManim<CR>',{buffer=true})
+        vim.keymap.set('n','<leader>mv',':ManimLatest<CR>',{buffer=true})
     end,
 group="autoCmdsForPython"})
 

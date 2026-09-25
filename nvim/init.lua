@@ -1,6 +1,7 @@
 -- disable netrw at the very start of your init.lua
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
+vim.g.latex_to_unicode_tab = 1
 
 -- NeoVim Lua configuration script
 vim.cmd("set expandtab")
@@ -67,6 +68,10 @@ vim.keymap.set('n','<leader>rt',":retab<CR>")
 
 vim.keymap.set('n','<F1>',"<Esc>")
 vim.keymap.set('i','<F1>',"<Esc>")
+
+-- enabling and disabling copilot
+vim.keymap.set('n','<leader>ce',":Copilot enable<CR>",{})
+vim.keymap.set('n','<leader>cd',":Copilot disable<CR>",{})
 
 -- setting filetype to cpp
 vim.keymap.set('n','<leader>fc',":set filetype=cpp<CR>",{})
