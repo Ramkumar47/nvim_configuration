@@ -73,6 +73,9 @@ vim.keymap.set('i','<F1>',"<Esc>")
 vim.keymap.set('n','<leader>ce',":Copilot enable<CR>",{})
 vim.keymap.set('n','<leader>cd',":Copilot disable<CR>",{})
 
+-- toggling copilot chat
+vim.keymap.set('n','<leader>cc',":CopilotChatToggle<CR>",{})
+
 -- setting filetype to cpp
 vim.keymap.set('n','<leader>fc',":set filetype=cpp<CR>",{})
 
